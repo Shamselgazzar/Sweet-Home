@@ -2,11 +2,65 @@
 
 Sweet Home is a full-stack web application designed for browsing and managing apartment listings. It provides a user-friendly interface for searching, viewing, and adding apartment listings, with a responsive design suitable for both desktop and mobile devices.
 
+
+## Getting Started
+
+Before installation, ensure you have Git, Node.js (v20+), Docker, and Docker Compose installed.
+
+### Installation
+
+1. Clone the repository:
+
+```plaintext
+git clone https://github.com/Shamselgazzar/sweet-home.git
+```
+
+2. navigate to the cloned repository:
+
+```plaintext
+cd sweet-home
+```
+
+3. Build and start the Docker containers:
+
+```plaintext
+docker-compose up --build
+```
+
+
+3. The application should now be running:
+
+1. Frontend: [http://localhost:3000](http://localhost:3000)
+2. Backend API: [http://localhost:5001](http://localhost:5001)
+3. Swagger Documentation: [http://localhost:5001/api-docs](http://localhost:5001/api-docs)
+
+
+
+## API Reference
+
+The API is documented using Swagger, accessible at:
+
+[http://localhost:5001/api-docs](http://localhost:5001/api-docs)
+
+Notable endpoints include:
+
+- GET /api/apartments: Retrieve a paginated list of apartments
+- GET /api/apartments/:id: Fetch details of a specific apartment
+- POST /api/apartments: Create a new apartment listing
+- GET /api/apartments/search: Search for apartments by query
+
+
+## Data Population - Seeding Script
+
+The backend includes a data seeding script that populates the database with initial apartment data. 
+
+
 ## Tech Stack
 
 ### Frontend
 
 - Next.js 13 with App Router
+- React
 - TypeScript
 - Tailwind CSS
 - shadcn/ui components
@@ -24,103 +78,24 @@ Sweet Home is a full-stack web application designed for browsing and managing ap
 
 - Docker and Docker Compose
 
-
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- Node.js (v14 or later)
-- Docker and Docker Compose
-- Git
-
-
-### Installation
-
-1. Clone the repository:
-
-```plaintext
-git clone https://github.com/Shamselgazzar/sweet-home.git
-
-cd sweet-home
-```
-
-
-2. Build and start the Docker containers:
-
-```plaintext
-docker-compose up --build
-```
-
-
-3. The application should now be running:
-
-1. Frontend: [http://localhost:3000](http://localhost:3000)
-2. Backend API: [http://localhost:5001](http://localhost:5001)
-3. Swagger Documentation: [http://localhost:5001/api-docs](http://localhost:5001/api-docs)
-
-
-## Development
-
-For development purposes, the project is set up with hot-reloading for both the client and server:
-
-- Client-side changes will be reflected immediately in the browser
-- Server-side changes will trigger an automatic restart of the Node.js server
-
-
-## API Documentation
-
-API endpoints can be explored and tested using the Swagger documentation available at:
-
-[http://localhost:5001/api-docs](http://localhost:5001/api-docs)
-
-Key endpoints include:
-
-- GET /api/apartments: List all apartments (with pagination)
-- GET /api/apartments/:id: Get details of a specific apartment
-- POST /api/apartments: Create a new apartment listing
-- GET /api/apartments/search: Search apartments by query
-
-
-## Data Population
-
-The backend includes a data seeding script that populates the database with initial apartment data. This script runs automatically when the containers start, but can be run manually if needed:
-
-1. Access the API container:
-
-```plaintext
-docker-compose exec api sh
-```
-
-2. Run the seed script:
-
-```plaintext
-npm run seed
-```
-
 ## UI Components
 
 The project utilizes shadcn/ui, a collection of re-usable components built using Radix UI and Tailwind CSS. Key components include:
 
 - Button, Card, Dialog, Input, Select, Slider, 
-- Switch, Sheet, Skeleton (for loading states) and more...
+- Switch, Sheet, Skeleton (for loading states), 
+- Toast (for notification messages) and more...
 
 ## Features
 
-- Browse apartment listings with pagination
+- Apartment listing with pagination (main view)
+- Details page for apartment information
+- Create new apartment popup
+- Responsive design suitable for mobile, tablet, and desktop
 - Search functionality by name, unit number, or project
-- Detailed view of apartment information
-- Create new apartment listings
-- Responsive design for mobile and desktop
 - Advanced filtering options (price range, bedrooms, bathrooms, size, year built) (UI only, not fully implemented)
 - Dark mode support (UI only, not fully implemented)
 
-
-## Current Status and Limitations
-
-- The search filter functionality are UI-only and not fully connected to the backend.
-- Dark mode is partially implemented in the UI but not fully functional.
 
 ## Potential Enhancements
 
@@ -129,9 +104,10 @@ The project utilizes shadcn/ui, a collection of re-usable components built using
 3. Integrate a map view for apartment locations
 5. Add a favorites or bookmarking system for users
 6. Enhance the search functionality with more advanced filters and sorting options
-7. Implement full dark mode
-8. Add image upload functionality for apartment listings
-9. Implement a review and rating system for apartments
+7. Implement a working dark mode
+8. The filter sheet (side menu) are UI-only and not fully connected to the backend.
+9. Add image upload functionality for apartment listings
+10. Implement a review and rating system for apartments
 
 
 ## Contributing

@@ -59,20 +59,25 @@ export function ApartmentList() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {isLoading
-          ? Array(itemsPerPage).fill(0).map((_, index) => (
-              <ApartmentSkeleton key={index} />
-            ))
-          : apartments.map((apartment) => (
-              <ApartmentCard
-                key={apartment._id}
-                apartment={apartment}
-              />
-            ))
-        }
+        {isLoading ? (
+          Array(itemsPerPage).fill(0).map((_, index) => (
+            <ApartmentSkeleton key={index} />
+          ))
+        ) : apartments.length === 0 ? (
+            <div className="col-span-full flex items-center justify-center">
+              <p className="text-muted-foreground font-semibold uppercase tracking-wide">No Results Found</p>
+            </div>
+        ) : (
+          apartments.map((apartment) => (
+            <ApartmentCard
+              key={apartment._id}
+              apartment={apartment}
+            />
+          ))
+        )}
       </div>
       
-      {!isLoading && (
+      { !isLoading && totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
