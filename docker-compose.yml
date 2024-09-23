@@ -1,0 +1,50 @@
+services:
+  sweet-home-app:
+    build:
+      context: ./sweet-home-app
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - sweet-home-api
+    environment:
+      - API_BASE_URL=http://sweet-home-api:5001
+    networks:
+      - app-network
+
+  sweet-home-api:
+    build:
+      context: ./sweet-home-api
+      dockerfile: Dockerfile
+    ports:
+      - '5001:5001'
+    depends_on:
+      - mongo
+    environment:
+      - PORT=5001
+      - MONGO_URI=mongodb://mongo:27017/sweet-home
+      - UNSPLASH_ACCESS_KEY=OXeWt0Rc0HMbUJeT09GNoXo7oP-s1mcvs4kLO0n6UFg
+    networks:
+      - app-network
+    command: >
+      sh -c "
+      npm run seed && 
+      npm start
+      "
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
