@@ -1,4 +1,3 @@
-'use server'
 import { API_BASE_URL } from '../../environment';
 import { Apartment } from '../types/Apartment';
 import { ApartmentsResponse } from '../types/ApartmentsResponse';
