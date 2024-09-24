@@ -16,7 +16,16 @@ export const getApartments = async (req: Request, res: Response) => {
       query = { [searchType]: { $regex: searchQuery, $options: 'i' } };
     }
 
-    const apartments = await Apartment.find(query).skip(skip).limit(limit);
+    const apartments = await Apartment.find(query, {
+      _id: 1,
+      name: 1,
+      unitNumber: 1,
+      project: 1,
+      price: 1,
+      description: 1,
+      images: 1
+    }).skip(skip).limit(limit);
+
     const totalApartments = await Apartment.countDocuments(query);
     const totalPages = Math.ceil(totalApartments / limit);
 
