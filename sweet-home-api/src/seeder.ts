@@ -19,7 +19,7 @@ const getUnsplashImageUrls = async (query: string, count: number): Promise<strin
 
     if (result.response?.results) {
       console.log('number of images:', result.response.results.length)
-      const urls = result.response.results.map(photo => photo.urls.small);
+      const urls = result.response.results.map(photo => photo.urls.regular);
       return urls;
     } else {
       console.error('No results found for the query:', query);

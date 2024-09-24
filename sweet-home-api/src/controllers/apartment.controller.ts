@@ -23,8 +23,7 @@ export const getApartments = async (req: Request, res: Response) => {
       project: 1,
       price: 1,
       description: 1,
-      images: 1
-    }).skip(skip).limit(limit);
+    }).skip(skip).limit(limit).select({ images: { $slice: 1 } });
 
     const totalApartments = await Apartment.countDocuments(query);
     const totalPages = Math.ceil(totalApartments / limit);
