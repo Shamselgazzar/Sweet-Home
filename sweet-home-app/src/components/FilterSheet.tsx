@@ -7,7 +7,6 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
 
 interface FilterState {
   priceRange: [number, number]
@@ -15,7 +14,6 @@ interface FilterState {
   bathrooms: string
   size: [number, number]
   yearBuilt: [number, number]
-  amenities: string[]
 }
 
 const currentYear = new Date().getFullYear()
@@ -27,8 +25,7 @@ export function FilterSheet() {
     bedrooms: '0',
     bathrooms: '0',
     size: [0, 500],
-    yearBuilt: [1900, currentYear],
-    amenities: [],
+    yearBuilt: [1900, currentYear]
   })
 
   const handlePriceChange = (value: [number, number]) => {
@@ -43,17 +40,8 @@ export function FilterSheet() {
     setFilters(prev => ({ ...prev, yearBuilt: value }))
   }
 
-  const handleAmenityToggle = (amenity: string) => {
-    setFilters(prev => ({
-      ...prev,
-      amenities: prev.amenities.includes(amenity)
-        ? prev.amenities.filter(a => a !== amenity)
-        : [...prev.amenities, amenity]
-    }))
-  }
 
   const handleApplyFilters = () => {
-    // Here you would typically update your global state or fetch filtered data
     console.log('Applying filters:', filters)
   }
 
@@ -63,8 +51,7 @@ export function FilterSheet() {
       bedrooms: '0',
       bathrooms: '0',
       size: [0, 500],
-      yearBuilt: [1900, currentYear],
-      amenities: [],
+      yearBuilt: [1900, currentYear]
     })
   }
 
@@ -157,28 +144,13 @@ export function FilterSheet() {
               <span>{filters.yearBuilt[1]}</span>
             </div>
           </div>
-          <div className="space-y-2">
-            <Label>Amenities</Label>
-            <div className="grid grid-cols-2 gap-2">
-              {['Parking', 'Pool', 'Gym', 'Elevator', 'Balcony', 'Security'].map((amenity) => (
-                <div key={amenity} className="flex items-center space-x-2">
-                  <Switch
-                    id={`amenity-${amenity.toLowerCase()}`}
-                    checked={filters.amenities.includes(amenity)}
-                    onCheckedChange={() => handleAmenityToggle(amenity)}
-                  />
-                  <Label htmlFor={`amenity-${amenity.toLowerCase()}`}>{amenity}</Label>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
         <SheetFooter className="flex justify-between">
-          <Button variant="outline" onClick={handleResetFilters}>
+          <Button className='my-2 bg-white border-slate-400' variant="outline" onClick={handleResetFilters}>
             <X className="mr-2 h-4 w-4" /> Reset
           </Button>
           <SheetClose asChild>
-            <Button onClick={handleApplyFilters}>Apply Filters</Button>
+            <Button className='my-2 mt-4' onClick={handleApplyFilters}>Apply Filters</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

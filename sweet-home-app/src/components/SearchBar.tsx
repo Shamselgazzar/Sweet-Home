@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Search } from 'lucide-react'
+import { Search, XIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -18,6 +18,12 @@ export function SearchBar({ onSearch }: SearchBarProps) {
 
   const handleSearch = () => {
     onSearch(searchQuery, searchType)
+  }
+
+  const handleClear = () => {
+    setSearchQuery('')
+    setSearchType('name')
+    onSearch('', 'name')
   }
 
   return (
@@ -52,13 +58,19 @@ export function SearchBar({ onSearch }: SearchBarProps) {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleSearch} className={cn(
-          "w-full sm:w-auto",
-          "bg-primary text-primary-foreground hover:bg-primary/90",
-          "transition-colors duration-200"
-        )}>
-          <Search className="mr-2 h-4 w-4" /> Search
-        </Button>
+        <div className="flex items-center space-x-2">
+          <Button onClick={handleSearch} className={cn(
+            "w-full sm:w-auto",
+            "bg-primary text-primary-foreground hover:bg-primary/90",
+            "transition-colors duration-200"
+          )}>
+            <Search className="mr-2 h-4 w-4" /> Search
+          </Button>
+          <Button onClick={handleClear} className="w-10 h-10 p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200">
+            <XIcon className="h-4 w-4" />
+          </Button>
+        </div>
+
       </div>
     </div>
   )
