@@ -57,34 +57,15 @@ The backend includes a data seeding script that populates the database with init
 
 ## Tech Stack
 
-### Frontend
-
-- Next.js 13 with App Router
-- React
-- TypeScript
-- Tailwind CSS
-- shadcn/ui components
-
-
-### Backend
-
-- Node.js
-- Express.js
-- TypeScript
-- MongoDB
-
-
-### Development Tools
-
-- Docker and Docker Compose
+- Next.js 13, React, TypeScript, Tailwind CSS, shadcn/ui (frontend)
+- Node.js, Express.js, TypeScript, MongoDB (backend)
+- Docker and Docker Compose (development tools)
 
 ## UI Components
 
 The project utilizes shadcn/ui, a collection of re-usable components built using Radix UI and Tailwind CSS. Key components include:
 
-- Button, Card, Dialog, Input, Select, Slider, 
-- Switch, Sheet, Skeleton (for loading states), 
-- Toast (for notification messages) and more...
+Button, Card, Dialog, Input, Select, Slider, Switch, Sheet, Skeleton (for loading states), Toast (for notification messages) and more...
 
 ## Features
 

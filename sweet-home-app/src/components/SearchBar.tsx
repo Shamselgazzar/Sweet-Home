@@ -8,12 +8,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
-export function SearchBar() {
+interface SearchBarProps {
+  onSearch: (query: string, type: string) => void
+}
+
+export function SearchBar({ onSearch }: SearchBarProps) {
   const [searchType, setSearchType] = useState('name')
   const [searchQuery, setSearchQuery] = useState('')
 
-  const onSearch = () => {
-    console.log('searching for:', searchType, searchQuery)
+  const handleSearch = () => {
+    onSearch(searchQuery, searchType)
   }
 
   return (
@@ -48,7 +52,7 @@ export function SearchBar() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={onSearch} className={cn(
+        <Button onClick={handleSearch} className={cn(
           "w-full sm:w-auto",
           "bg-primary text-primary-foreground hover:bg-primary/90",
           "transition-colors duration-200"

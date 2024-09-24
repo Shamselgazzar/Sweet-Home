@@ -7,7 +7,7 @@ const router = Router();
  * @swagger
  * /api/apartments:
  *   get:
- *     summary: Get a paginated list of apartments
+ *     summary: Get a paginated list of apartments with optional search
  *     parameters:
  *       - in: query
  *         name: page
@@ -17,6 +17,15 @@ const router = Router();
  *         name: limit
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: searchQuery
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: searchType
+ *         schema:
+ *           type: string
+ *           enum: [name, unitNumber, project]
  *     responses:
  *       200:
  *         description: List of apartments with pagination

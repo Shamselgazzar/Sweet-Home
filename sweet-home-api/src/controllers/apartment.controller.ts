@@ -1,15 +1,23 @@
 import { Request, Response } from 'express';
 import { Apartment } from '../models/apartment.model';
 
-// Get all apartments
+// Get a paginated list of apartments with optional search
 export const getApartments = async (req: Request, res: Response) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
+    const searchQuery = req.query.searchQuery as string;
+    const searchType = req.query.searchType as 'name' | 'unitNumber' | 'project';
 
-    const apartments = await Apartment.find().skip(skip).limit(limit);
-    const totalApartments = await Apartment.countDocuments();
+    let query = {};
+
+    if (searchQuery && searchType) {
+      query = { [searchType]: { $regex: searchQuery, $options: 'i' } };
+    }
+
+    const apartments = await Apartment.find(query).skip(skip).limit(limit);
+    const totalApartments = await Apartment.countDocuments(query);
     const totalPages = Math.ceil(totalApartments / limit);
 
     if (!apartments.length) {
